@@ -1,0 +1,192 @@
+- Testiranje java projekta Calculator po metodi crne kutije -
+
+Test Case: TC01 - Verifikacija Funkcionalnosti Sabiranja
+Opis: Proveriti da li kalkulator ispravno sabira dva broja.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 2.
+Pritisnuti +.
+Uneti 3.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje 5.
+Stvarni Rezultat: Prikaz pokazuje 5.
+Status: Pass.
+Komentari: Nema.
+
+Test Case: TC02 - Verifikacija Funkcionalnosti Oduzimanja
+Opis: Proveriti da li kalkulator ispravno oduzima jedan broj od drugog.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 5.
+Pritisnuti -.
+Uneti 3.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje 2.
+Stvarni Rezultat: Prikaz pokazuje 2.
+Status: Pass.
+Komentari: Nema.
+
+Test Case: TC03 - Verifikacija Funkcionalnosti Množenja
+Opis: Proveriti da li kalkulator ispravno množi dva broja.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 4.
+Pritisnuti *.
+Uneti 3.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje 12.
+Stvarni Rezultat: Prikaz pokazuje 12.
+Status: Pass.
+Komentari: Nema.
+
+Test Case: TC04 - Verifikacija Funkcionalnosti Deljenja
+Opis: Proveriti da li kalkulator ispravno deli jedan broj sa drugim.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 8.
+Pritisnuti /.
+Uneti 2.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje 4.
+Stvarni Rezultat: Prikaz pokazuje 4.
+Status: Pass.
+Komentari: Nema.
+
+Test Case: TC05 - Verifikacija Kompleksnog Izraza
+Opis: Proveriti da li kalkulator ispravno izračunava kompleksan aritmetički izraz.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 10+5*4+3.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje 33 (5*4=20 -> 10+20+3=33).
+Stvarni Rezultat: Prikaz pokazuje 33.
+Status: Pass.
+Komentari: Nema.
+
+Test Case: TC06 - Verifikacija Deljenja sa Nulom
+Opis: Proveriti da li kalkulator ispravno rukuje deljenjem sa nulom.
+Preduslovi: Calculator application je pokrenuta.
+Koraci Testiranja:
+Uneti 8.
+Pritisnuti /.
+Uneti 0.
+Pritisnuti =.
+Očekivani Rezultat: Prikaz pokazuje poruku o grešci.
+Stvarni Rezultat: Aplikacija se ruši.
+Status: Fail.
+Komentari: Aplikacija se ruši kada se pokuša deljenje sa nulom.
+
+- Jedinicni testovi po uzoru na onaj koji je prikazan u lekciji Nivoi testiranja -
+
+*U lekciji Nivoi testiranja kod je pisan u Pythonu iako je projekat u Javi, ja cu obaviti jedinicne testove u Javi.
+*Zadatak nalaze da se rezultati dostave u obliku single fajla tako da cu nalepiti kod direktno iz NetBeansa.
+
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+public class CalculatorTest {
+
+    @Test
+    public void testCalculateAddition() {
+        String expression = "4+5";
+        double expectedResult = 9.0;
+        double actualResult = Calculator.calculate(expression);
+        
+        if (expectedResult == actualResult) {
+            System.out.println("Test succeeded for addition: " + expression);
+        } else {
+            System.out.println("Test failed for addition: " + expression);
+        }
+        
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCalculateSubtraction() {
+        String expression = "10-5";
+        double expectedResult = 5.0;
+        double actualResult = Calculator.calculate(expression);
+        
+        if (expectedResult == actualResult) {
+            System.out.println("Test succeeded for subtraction: " + expression);
+        } else {
+            System.out.println("Test failed for subtraction: " + expression);
+        }
+        
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCalculateMultiplication() {
+        String expression = "10*5";
+        double expectedResult = 50.0;
+        double actualResult = Calculator.calculate(expression);
+        
+        if (expectedResult == actualResult) {
+            System.out.println("Test succeeded for multiplication: " + expression);
+        } else {
+            System.out.println("Test failed for multiplication: " + expression);
+        }
+        
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCalculateDivision() {
+        String expression = "10/2";
+        double expectedResult = 5.0;
+        double actualResult = Calculator.calculate(expression);
+        
+        if (expectedResult == actualResult) {
+            System.out.println("Test succeeded for division: " + expression);
+        } else {
+            System.out.println("Test failed for division: " + expression);
+        }
+        
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCalculateComplexExpression() {
+        String expression = "10+5*4+3";
+        double expectedResult = 33.0; // (5*4=20) -> (10+20+3=33)
+        double actualResult = Calculator.calculate(expression);
+        
+        if (expectedResult == actualResult) {
+            System.out.println("Test succeeded for complex expression: " + expression);
+        } else {
+            System.out.println("Test failed for complex expression: " + expression);
+        }
+        
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    public void testCalculateDivisionByZero() {
+        String expression = "10/0";
+        
+        try {
+            Calculator.calculate(expression);
+            System.out.println("Test failed for division by zero: " + expression);
+            fail("Division by zero should have thrown an exception");
+        } catch (ArithmeticException e) {
+            System.out.println("Test succeeded for division by zero: " + expression);
+        }
+    }
+}
+
+- Detektovani propusti, nedostaci i zapazanja -
+
+Osnovne aritmetičke funkcije rade ispravno, ali aplikacija ima nekoliko nedostataka u rukovanju izuzecima i validaciji unosa.
+Kod može biti poboljšan dodavanjem javadoc komentara i korišćenjem biblioteka za evaluaciju aritmetičkih izraza.
+Preporuke:
+
+Dodati validaciju unosa pre parsiranja brojeva u metodi calculate.
+Dodati rukovanje izuzetkom za deljenje sa nulom.
+Dodati javadoc komentare za bolje dokumentovanje koda.
+Razmisliti o korišćenju biblioteka za evaluaciju matematičkih izraza.
+Proveriti unete izraze na null ili prazne vrednosti pre prosleđivanja metodi calculate.
+Razmisliti o korišćenju konfiguracionih fajlova ili interfejsa za unos izraza.
+Dodati validaciju korisničkog unosa kako bi se izbegle greške prilikom parsiranja.
+
+Sevic Strahinja
